@@ -19,6 +19,8 @@ namespace Player
 
         [SerializeField] private float moveSpeed, jumpForce;
         private bool jump = false;
+
+        [SerializeField] private ConsoleHandler consoleHandler;
         // Start is called before the first frame update
         void Start()
         {
@@ -56,8 +58,18 @@ namespace Player
         private void FixedUpdate()
         {
             Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
-            body.velocity = new Vector3(move.x * moveSpeed, body.velocity.y,
-                move.y * moveSpeed);
+            if (consoleHandler.is2d)
+            {
+                // Player is not allowed to move along the z axis when in 2d mode.
+                body.velocity = new Vector3(move.x * moveSpeed, body.velocity.y,
+                    0);
+            }
+            else
+            {
+                body.velocity = new Vector3(move.x * moveSpeed, body.velocity.y,
+                    move.z * moveSpeed);
+            }
+            
             
             if (jump) 
             {   
