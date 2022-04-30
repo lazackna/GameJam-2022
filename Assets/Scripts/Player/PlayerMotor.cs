@@ -55,8 +55,10 @@ namespace Player
         
         private void FixedUpdate()
         {
-            body.velocity = new Vector3(moveInput.x * moveSpeed, body.velocity.y,
-                moveInput.y * moveSpeed);
+            Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
+            body.velocity = new Vector3(move.x * moveSpeed, body.velocity.y,
+                move.y * moveSpeed);
+            
             if (jump) 
             {   
                 isGrounded = false;
