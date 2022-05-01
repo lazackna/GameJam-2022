@@ -8,7 +8,6 @@ namespace Consoles
 {
     public class DS : MonoBehaviour
     {
-
         [SerializeField] private Camera mainCamera;
         [SerializeField] private Camera dsCamera;
         [SerializeField] private Camera dsTextureCamera;
@@ -41,10 +40,10 @@ namespace Consoles
             mousePos.z = dsCamera.nearClipPlane;
             lastPoint = dsCamera.ScreenToWorldPoint(mousePos);
             lastPoint.z = transform.position.z - 0.01f;
-
         }
 
         private List<Vector3> points = new List<Vector3>();
+
         private void OnMouseUp()
         {
             points.Add(lastPoint);
@@ -53,9 +52,14 @@ namespace Consoles
                 Debug.Log("Adding line");
                 lineController.SetupLine(points.ToArray());
                 Vector3 relative = GetRelativePosition(lastPoint);
-                Vector3 relativeToPlayer = RelativeToPlayerPosition(relative);
-                Instantiate(cube, relativeToPlayer, Quaternion.identity);
+                Vector3 relativeToPlayer = dsTextureCamera.ViewportToWorldPoint(
+                    new Vector3(
+                        relative.x,
+                        relative.y,
+                        -dsTextureCamera.transform.position.z));
                 
+                Instantiate(cube, relativeToPlayer, Quaternion.identity);
+
                 points.Clear();
             }
         }
@@ -77,22 +81,21 @@ namespace Consoles
             Vector3 point1 = points[0];
             Vector3 point2 = points[1];
 
+
             float deltaX = point2.x - point1.x;
             float deltaY = point2.y - point1.y;
 
             double angle = Math.Atan2((double)deltaY, (double)deltaX);
-            
+
         }
-        
+
         public Vector3 RelativeToPlayerPosition(Vector3 relative)
         {
-
             float height = 2 * dsTextureCamera.orthographicSize;
             float width = height * dsTextureCamera.aspect;
             float x = relative.x * width;
             float y = relative.y * height;
-           // x *= 2;
-           // y *= 2;
+
             Vector3 playerPos = dsTextureCamera.transform.parent.position;
             Vector3 worldPos = dsTextureCamera.ScreenToWorldPoint(new Vector3(x, y, 0));
             worldPos += playerPos;
@@ -100,23 +103,25 @@ namespace Consoles
             Vector3 test = playerPos + relative * 2;
             test.z = 0;
             //dsTextureCamera.ScreenToWorldPoint()
-            return test;
+            Debug.Log("world " + worldPos.x + ", " + worldPos.y);
+            return worldPos;
         }
-        
+
+        /**
+         * Return value for top-left is 0,0
+         * Bottom right 1,1
+         */
         public Vector3 GetRelativePosition(Vector3 point)
         {
             // on scale 1 a plane is 10 units long.
             Vector3 centerPoint = transform.position;
-            float width = transform.localScale.x * 10;
-            float heigth = transform.localScale.z * 10;
             Vector3 diff = point - centerPoint;
-            Vector3 relative = diff / transform.localScale.x;
-            // relative.x += 5;
-            // relative.y -= 5;
-           // relative.y 
-           // float height = 
-           return relative;
+            Vector3 relative = diff / (transform.localScale.x * 10);
+
+            relative = new Vector3(relative.x * -1 + 0.5f,  (relative.y - 0.5f) * -1, 0);
+            
+            Debug.Log(relative.x + ", " + relative.y);
+            return relative;
         }
-     
     }
 }
