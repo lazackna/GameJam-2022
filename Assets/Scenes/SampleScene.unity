@@ -1038,8 +1038,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 26.991467
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 4.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1063,7 +1063,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.7, z: -10}
+  m_LocalPosition: {x: 3, y: 4, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1083,7 +1083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 787378392}
   smoothSpeed: 0.125
-  offset: {x: 0, y: 1, z: -6}
+  offset: {x: 3.5, y: 2.5, z: -6}
   hasPerspective: 0
 --- !u!1 &1307544646
 GameObject:
@@ -1117,7 +1117,7 @@ MonoBehaviour:
   orthographicSize: 4.5
   camera: {fileID: 963194229}
   player: {fileID: 787378392}
-  playerModel: {fileID: 0}
+  playerModel: {fileID: 2019163271}
   DsRoot: {fileID: 1471171766}
   is2d: 1
 --- !u!4 &1307544648

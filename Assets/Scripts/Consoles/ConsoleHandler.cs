@@ -52,13 +52,14 @@ public class ConsoleHandler : MonoBehaviour
                 camera.hasPerspective = true;
                 mainCamera.orthographic = false;
                 playerModel.rotation = Quaternion.Euler(0, 90, 0);
-                playerModel.rotation = Quaternion.Euler(0, 90, 0);
+                playerModel.rotation = Quaternion.Euler(0, -90, 0);
                 camera.offset = cameraPositions3d;
             }
             else
             {
                 is2d = true;
                 player.rotation = Quaternion.Euler(0, 0, 0);
+                playerModel.rotation = Quaternion.Euler(0, -90, 0);
                 camera.hasPerspective = false;
                 mainCamera.orthographic = true;
                 mainCamera.transform.rotation = Quaternion.Euler(0,0,0);
