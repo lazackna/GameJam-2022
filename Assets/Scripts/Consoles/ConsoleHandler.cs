@@ -12,7 +12,8 @@ public class ConsoleHandler : MonoBehaviour
     [SerializeField] private CameraFollow camera;
 
     [SerializeField] private Transform player;
-    
+
+    [SerializeField] private Transform playerModel;    
     [SerializeField]private GameObject DsRoot;
     private bool dsOn = false;
 
@@ -50,6 +51,7 @@ public class ConsoleHandler : MonoBehaviour
                 player.rotation = Quaternion.Euler(0, 90, 0);
                 camera.hasPerspective = true;
                 mainCamera.orthographic = false;
+                playerModel.rotation = Quaternion.Euler(0, 90, 0);
                 camera.offset = cameraPositions3d;
             }
             else
@@ -60,6 +62,7 @@ public class ConsoleHandler : MonoBehaviour
                 mainCamera.orthographic = true;
                 mainCamera.transform.rotation = Quaternion.Euler(0,0,0);
                 mainCamera.orthographicSize = orthographicSize;
+                
                 camera.offset = cameraPositions2d;
             }
         }
