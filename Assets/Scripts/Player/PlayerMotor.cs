@@ -127,8 +127,15 @@ namespace Player
         {
             if (collision.gameObject.tag == "Enemy" && !isHit)
             {
-                health -= collision.gameObject.GetComponent<AbstractEnemy>().getDamage();
-                checkHealth();
+                if (collision.contacts[0].point.y < this.transform.position.y)
+                {
+                    
+                }
+                else
+                {
+                    health -= collision.gameObject.GetComponent<AbstractEnemy>().getDamage();
+                    checkHealth();
+                }
             }
         }
 

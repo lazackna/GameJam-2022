@@ -107,17 +107,29 @@ public class EnemyBugController : AbstractEnemy
 
     }
 
-    public override void die()
+    public override IEnumerator die()
     {
-        
+        animator.Play("DeathAnimation");
+        yield return new WaitForSeconds(1);
+        Destroy(this.gameObject);
+
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.Equals(player))
         {
-            animator.SetBool("Attacking", true);
-            isAttacking = true;
+            if (collision.contacts[0].point.y > this.transform.position.y + 0.2)
+            {
+                Debug.Log("Hit");
+                StartCoroutine(die());
+                
+            }
+            else
+            {
+                animator.SetBool("Attacking", true);
+                isAttacking = true;
+            }
         }
     }
 

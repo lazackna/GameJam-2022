@@ -8,7 +8,7 @@ public abstract class AbstractEnemy : MonoBehaviour
     public int damage { get; protected set; }
 
     public abstract void takeDamage(int damage);
-    public abstract void die();
+    public abstract IEnumerator die();
 
     public int getHealt()
     {
