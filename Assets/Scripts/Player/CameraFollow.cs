@@ -11,7 +11,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Vector3 cameraPositions3d;
 
     [SerializeField] private Vector2 cameraBounds;
-    [SerializeField] private float smoothSpeed = 0.25f;
+    [SerializeField] private float smoothSpeed;
 
     [SerializeField] public bool hasPerspective;
     
