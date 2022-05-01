@@ -17,13 +17,20 @@ public class CameraFollow : MonoBehaviour
         Vector3 desiredPosition = target.position + offset;
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
 
+        Transform cameraTransform = transform;
+        
         if (hasPerspective)
-            transform.LookAt(target);  
-        
-        
-        transform.position = smoothedPosition;
-        
-        
+        {
+            Transform transform1;
+            cameraTransform.LookAt(target);
+            cameraTransform.position = smoothedPosition;
+        }
+        else
+        {
+            var pos = cameraTransform.position;
+            cameraTransform.position = new Vector3(smoothedPosition.x, pos.y, pos.z);
+        }
+
     }
 
     
