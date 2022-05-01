@@ -58,6 +58,7 @@ public class ConsoleHandler : MonoBehaviour
             else
             {
                 is2d = true;
+                player.position = new Vector3(this.player.position.x, this.player.position.y, 0);
                 player.rotation = Quaternion.Euler(0, 0, 0);
                 playerModel.rotation = Quaternion.Euler(0, -90, 0);
                 camera.hasPerspective = false;
