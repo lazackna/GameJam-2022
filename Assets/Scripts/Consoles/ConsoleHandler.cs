@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class ConsoleHandler : MonoBehaviour
 {
-    private Vector3 cameraPositions2d = new Vector3(3.5f, 2.5f, -6);
-    private Vector3 cameraPositions3d = new Vector3(-10, 3, 0);
-
     [SerializeField] public float orthographicSize = 4.5f;
-    
+
     [SerializeField] private CameraFollow camera;
 
     [SerializeField] private Transform player;
@@ -50,7 +47,6 @@ public class ConsoleHandler : MonoBehaviour
                 player.rotation = Quaternion.Euler(0, 90, 0);
                 camera.hasPerspective = true;
                 mainCamera.orthographic = false;
-                camera.offset = cameraPositions3d;
             }
             else
             {
@@ -60,7 +56,6 @@ public class ConsoleHandler : MonoBehaviour
                 mainCamera.orthographic = true;
                 mainCamera.transform.rotation = Quaternion.Euler(0,0,0);
                 mainCamera.orthographicSize = orthographicSize;
-                camera.offset = cameraPositions2d;
             }
         }
 
@@ -82,7 +77,6 @@ public class ConsoleHandler : MonoBehaviour
                     mainCamera.orthographic = true;
                     mainCamera.transform.rotation = Quaternion.Euler(0,0,0);
                     mainCamera.orthographicSize = orthographicSize;
-                    camera.offset = cameraPositions2d;
                 }
 
                 DsRoot.SetActive(true);
