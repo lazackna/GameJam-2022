@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class ConsoleHandler : MonoBehaviour
 {
-    private Vector3 cameraPositions2d = new Vector3(0, -0.5f, -6);
-    private Vector3 cameraPositions3d = new Vector3(-6, 2, 0);
+    private Vector3 cameraPositions2d = new Vector3(3.5f, 2.5f, -6);
+    private Vector3 cameraPositions3d = new Vector3(-10, 3, 0);
 
+    [SerializeField] public float orthographicSize = 4.5f;
+    
     [SerializeField] private CameraFollow camera;
 
     [SerializeField] private Transform player;
@@ -15,7 +17,15 @@ public class ConsoleHandler : MonoBehaviour
     private bool dsOn = false;
 
     public bool is2d = true;
+
+    private Camera mainCamera;
+
     // Start is called before the first frame update
+    private void Awake()
+    {
+        mainCamera = Camera.main;
+    }
+
     void Start()
     {
         
@@ -30,7 +40,7 @@ public class ConsoleHandler : MonoBehaviour
             if (dsOn)
             {
                 DsRoot.SetActive(false);
-                Camera.main.rect = new Rect(0, 0, 1, 1);
+                mainCamera.rect = new Rect(0, 0, 1, 1);
                 dsOn = false;
             }
             //switch mode from 2d to 3d
@@ -38,12 +48,18 @@ public class ConsoleHandler : MonoBehaviour
             {
                 is2d = false;
                 player.rotation = Quaternion.Euler(0, 90, 0);
+                camera.hasPerspective = true;
+                mainCamera.orthographic = false;
                 camera.offset = cameraPositions3d;
             }
             else
             {
                 is2d = true;
                 player.rotation = Quaternion.Euler(0, 0, 0);
+                camera.hasPerspective = false;
+                mainCamera.orthographic = true;
+                mainCamera.transform.rotation = Quaternion.Euler(0,0,0);
+                mainCamera.orthographicSize = orthographicSize;
                 camera.offset = cameraPositions2d;
             }
         }
@@ -53,7 +69,7 @@ public class ConsoleHandler : MonoBehaviour
             if (dsOn)
             {
                 DsRoot.SetActive(false);
-                Camera.main.rect = new Rect(0, 0, 1, 1);
+                mainCamera.rect = new Rect(0, 0, 1, 1);
                 dsOn = false;
             }
             else
@@ -62,11 +78,15 @@ public class ConsoleHandler : MonoBehaviour
                 {
                     is2d = true;
                     player.rotation = Quaternion.Euler(0, 0, 0);
+                    camera.hasPerspective = false;
+                    mainCamera.orthographic = true;
+                    mainCamera.transform.rotation = Quaternion.Euler(0,0,0);
+                    mainCamera.orthographicSize = orthographicSize;
                     camera.offset = cameraPositions2d;
                 }
 
                 DsRoot.SetActive(true);
-                Camera.main.rect = new Rect(0, 0.5f, 1, 0.5f);
+                mainCamera.rect = new Rect(0, 0.5f, 1, 0.5f);
                 
                 dsOn = true;
             }
