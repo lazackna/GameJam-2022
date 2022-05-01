@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Consoles
 {
@@ -10,6 +11,8 @@ namespace Consoles
 
         [SerializeField] private Camera mainCamera;
         [SerializeField] private Camera dsCamera;
+        [SerializeField] private Camera dsTextureCamera;
+        [SerializeField] private GameObject cube;
 
         private Vector3 screenPoint;
         private Vector3 offset;
@@ -47,6 +50,9 @@ namespace Consoles
             {
                 Debug.Log("Adding line");
                 lineController.SetupLine(points.ToArray());
+                Vector3 relative = GetRelativePosition(lastPoint);
+                Vector3 relativeToPlayer = RelativeToPlayerPosition(relative);
+                Instantiate(cube, relative, Quaternion.identity);
                 points.Clear();
             }
         }
@@ -63,6 +69,31 @@ namespace Consoles
             // Debug.Log("Mouse Drag");
         }
 
+        public Vector3 RelativeToPlayerPosition(Vector3 relative)
+        {
+
+            float height = 2 * dsTextureCamera.orthographicSize;
+            float width = height * dsTextureCamera.aspect;
+            float x = relative.x * width;
+            float y = relative.y * height;
+            Vector3 playerPos = dsTextureCamera.transform.parent.position;
+            Vector3 worldPos = dsTextureCamera.ScreenToWorldPoint(new Vector3(x, y, 0));
+            worldPos += playerPos;
+            //dsTextureCamera.ScreenToWorldPoint()
+            return worldPos;
+        }
+        
+        public Vector3 GetRelativePosition(Vector3 point)
+        {
+            // on scale 1 a plane is 10 units long.
+            Vector3 centerPoint = transform.position;
+            float width = transform.localScale.x * 10;
+            float heigth = transform.localScale.z * 10;
+            Vector3 diff = point - centerPoint;
+            Vector3 relative = diff / 1.5f;
+           // float height = 
+           return relative;
+        }
      
     }
 }
