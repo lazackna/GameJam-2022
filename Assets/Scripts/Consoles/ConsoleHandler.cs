@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ConsoleHandler : MonoBehaviour
 {
-    [SerializeField] public float orthographicSize = 4.5f;
+    private readonly float orthographicSize = 6.0f;
 
     [SerializeField] private CameraFollow camera;
 
