@@ -7,7 +7,8 @@ namespace Player
 {
     public class PlayerMotor : MonoBehaviour
     {
-        
+        [SerializeField] private GameObject playerModel;
+
         private Rigidbody body;
         [SerializeField] private Transform[] groundCheck;
         
@@ -21,6 +22,8 @@ namespace Player
         private bool jump = false;
 
         [SerializeField] private ConsoleHandler consoleHandler;
+
+        [SerializeField] public Animator animator;
         // Start is called before the first frame update
         void Start()
         {
@@ -37,7 +40,6 @@ namespace Player
             moveInput.y = Input.GetAxisRaw("Vertical");
             moveInput.Normalize();
             
-            RaycastHit hit;
             bool foundGround = false;
             foreach (var g in groundCheck)
             {
@@ -46,20 +48,36 @@ namespace Player
                 if(Physics.CheckSphere(g.position, groundDistance, whatIsGround)) {
                     isGrounded = true;
                     foundGround = true;
+                    animator.SetBool("Jump", false);
                     break;
+                    
                 }
             }
 
             if (!foundGround) isGrounded = false;
 
-            if (Input.GetButtonDown("Jump") && isGrounded) jump = true;
+            if (Input.GetButtonDown("Jump") && isGrounded)
+            {
+                jump = true;
+                animator.SetBool("Jump", true);
+            }
+            animator.SetFloat("Speed", Mathf.Abs(body.velocity.x)) ;
+            
         }
+
         
         private void FixedUpdate()
         {
             Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
             if (consoleHandler.is2d)
             {
+                if(moveInput.x < 0)
+                {
+                    playerModel.transform.rotation = Quaternion.Euler(0, -90, 0);
+                } else if (moveInput.x > 0)
+                {
+                    playerModel.transform.rotation = Quaternion.Euler(0, 90, 0);
+                }
                 // Player is not allowed to move along the z axis when in 2d mode.
                 body.velocity = new Vector3(move.x * moveSpeed, body.velocity.y,
                     0);
