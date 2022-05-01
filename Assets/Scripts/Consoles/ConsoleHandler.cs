@@ -78,6 +78,10 @@ public class ConsoleHandler : MonoBehaviour
                 {
                     is2d = true;
                     player.rotation = Quaternion.Euler(0, 0, 0);
+                    camera.hasPerspective = false;
+                    mainCamera.orthographic = true;
+                    mainCamera.transform.rotation = Quaternion.Euler(0,0,0);
+                    mainCamera.orthographicSize = orthographicSize;
                     camera.offset = cameraPositions2d;
                 }
 
