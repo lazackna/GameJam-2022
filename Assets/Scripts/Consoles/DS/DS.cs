@@ -76,8 +76,11 @@ namespace Consoles
         {
             Vector3 point1 = points[0];
             Vector3 point2 = points[1];
-            
-            
+
+            float deltaX = point2.x - point1.x;
+            float deltaY = point2.y - point1.y;
+
+            double angle = Math.Atan2((double)deltaY, (double)deltaX);
             
         }
         
