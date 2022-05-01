@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -677,8 +677,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 40
   field of view: 60
-  orthographic: 0
-  orthographic size: 10.45
+  orthographic: 1
+  orthographic size: 12
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -744,6 +744,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
   dsCamera: {fileID: 626076667}
+  dsTextureCamera: {fileID: 842673032}
+  cube: {fileID: 8978368810620928411, guid: 648c25a0eb8c8654e9cfc5b3e2b1b5d6, type: 3}
+  bridge: {fileID: 0}
   lineController: {fileID: 903363337}
 --- !u!64 &903363333
 MeshCollider:
@@ -1017,6 +1020,7 @@ MonoBehaviour:
   target: {fileID: 787378392}
   smoothSpeed: 0.125
   offset: {x: 0, y: -0.5, z: -6}
+  hasPerspective: 0
 --- !u!1 &1307544646
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,6 +1050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0a158840a822d4b997b69e9be9ef5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orthographicSize: 4.5
   camera: {fileID: 963194229}
   player: {fileID: 787378392}
   DsRoot: {fileID: 1471171766}
