@@ -73,10 +73,10 @@ namespace Player
             {
                 if(moveInput.x < 0)
                 {
-                    playerModel.transform.rotation = Quaternion.Euler(0, -90, 0);
+                    playerModel.transform.rotation = Quaternion.Euler(0, 90, 0);
                 } else if (moveInput.x > 0)
                 {
-                    playerModel.transform.rotation = Quaternion.Euler(0, 90, 0);
+                    playerModel.transform.rotation = Quaternion.Euler(0, -90, 0);
                 }
                 // Player is not allowed to move along the z axis when in 2d mode.
                 body.velocity = new Vector3(move.x * moveSpeed, body.velocity.y,
