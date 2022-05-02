@@ -45,14 +45,14 @@ public class PowerUpHandler : MonoBehaviour
 
         powerUpTime[activePowerUp] -= Time.deltaTime;
 
-        if (powerUpTime[activePowerUp] >= 0)
-            DrawPowerUps(activePowerUp);
-        else
+        if (powerUpTime[activePowerUp] <= 0)
         {
             if (activePowerUp == PowerUpType.N64_CONSOLE) callbackHandler.SwitchN64();
             if (activePowerUp == PowerUpType.DS_CONSOLE) callbackHandler.SwitchNintendo();
             activePowerUp = PowerUpType.SWITCH_CONSOLE;
         }
+        
+        DrawPowerUps(activePowerUp);
     }
 
     public void OnPowerUpTrigger(PowerUpType powerUpType, float time)
@@ -73,8 +73,10 @@ public class PowerUpHandler : MonoBehaviour
 
     private void DrawPowerUps(PowerUpType type)
     {
+        if(type == PowerUpType.SWITCH_CONSOLE) return;
+
         powerUpObject[type].text = (int)powerUpTime[type] + "";
 
-        powerUpObject[type].gameObject.SetActive(powerUpTime[type] >= 0);
+        powerUpObject[type].gameObject.SetActive((int)powerUpTime[type] > 0);
     }
 }
