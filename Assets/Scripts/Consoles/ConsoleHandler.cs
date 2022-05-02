@@ -60,7 +60,7 @@ public class ConsoleHandler : MonoBehaviour
                 SwitchNintendo();
     }
 
-    private void SwitchN64()
+    public void SwitchN64()
     {
         if (dsOn)
         {
@@ -99,7 +99,7 @@ public class ConsoleHandler : MonoBehaviour
         }
     }
 
-    private void SwitchNintendo()
+    public void SwitchNintendo()
     {
         if (dsOn)
         {

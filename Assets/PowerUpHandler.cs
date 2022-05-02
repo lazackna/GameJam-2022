@@ -1,6 +1,6 @@
-using System;using System.Collections;
+using System;
+using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,12 +13,12 @@ public enum PowerUpType
 
 public class PowerUpHandler : MonoBehaviour
 {
-
     private PowerUpType activePowerUp = PowerUpType.SWITCH_CONSOLE;
 
+    [SerializeField] private ConsoleHandler callbackHandler;
     [SerializeField] private Text DSText;
     [SerializeField] private Text N64Text;
-    
+
     private Dictionary<PowerUpType, float> powerUpTime;
     private Dictionary<PowerUpType, Text> powerUpObject;
 
@@ -30,7 +30,7 @@ public class PowerUpHandler : MonoBehaviour
             { PowerUpType.DS_CONSOLE, 0 },
             { PowerUpType.N64_CONSOLE, 0 }
         };
-        
+
         powerUpObject = new Dictionary<PowerUpType, Text>
         {
             { PowerUpType.DS_CONSOLE, DSText },
@@ -44,9 +44,15 @@ public class PowerUpHandler : MonoBehaviour
         if (activePowerUp == PowerUpType.SWITCH_CONSOLE) return;
 
         powerUpTime[activePowerUp] -= Time.deltaTime;
-        
-        if (powerUpTime[activePowerUp] >= 0) DrawPowerUps(activePowerUp);
-        
+
+        if (powerUpTime[activePowerUp] >= 0)
+            DrawPowerUps(activePowerUp);
+        else
+        {
+            if (activePowerUp == PowerUpType.N64_CONSOLE) callbackHandler.SwitchN64();
+            if (activePowerUp == PowerUpType.DS_CONSOLE) callbackHandler.SwitchNintendo();
+            activePowerUp = PowerUpType.SWITCH_CONSOLE;
+        }
     }
 
     public void OnPowerUpTrigger(PowerUpType powerUpType, float time)
@@ -64,11 +70,11 @@ public class PowerUpHandler : MonoBehaviour
 
         return true;
     }
-    
+
     private void DrawPowerUps(PowerUpType type)
     {
         powerUpObject[type].text = (int)powerUpTime[type] + "";
-        
+
         powerUpObject[type].gameObject.SetActive(powerUpTime[type] >= 0);
     }
 }
