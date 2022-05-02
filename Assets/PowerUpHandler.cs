@@ -56,12 +56,13 @@ public class PowerUpHandler : MonoBehaviour
         DrawPowerUps(powerUpType);
     }
 
-    public void OnPowerUpCall(PowerUpType requestedType)
+    public bool OnPowerUpCall(PowerUpType requestedType)
     {
-        if (powerUpTime[requestedType] < 0) return;
+        if (powerUpTime[requestedType] <= 0) return false;
 
         activePowerUp = activePowerUp == requestedType ? PowerUpType.SWITCH_CONSOLE : requestedType;
-        
+
+        return true;
     }
     
     private void DrawPowerUps(PowerUpType type)
