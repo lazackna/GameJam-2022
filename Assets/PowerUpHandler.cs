@@ -45,7 +45,8 @@ public class PowerUpHandler : MonoBehaviour
 
         powerUpTime[activePowerUp] -= Time.deltaTime;
         
-        if (powerUpTime[activePowerUp] < 0) DrawPowerUps(activePowerUp);
+        if (powerUpTime[activePowerUp] >= 0) DrawPowerUps(activePowerUp);
+        
     }
 
     public void OnPowerUpTrigger(PowerUpType powerUpType, float time)
@@ -55,6 +56,14 @@ public class PowerUpHandler : MonoBehaviour
         DrawPowerUps(powerUpType);
     }
 
+    public void OnPowerUpCall(PowerUpType requestedType)
+    {
+        if (powerUpTime[requestedType] < 0) return;
+
+        activePowerUp = activePowerUp == requestedType ? PowerUpType.SWITCH_CONSOLE : requestedType;
+        
+    }
+    
     private void DrawPowerUps(PowerUpType type)
     {
         powerUpObject[type].text = (int)powerUpTime[type] + "";

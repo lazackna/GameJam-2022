@@ -30,7 +30,7 @@ public class CameraFollow : MonoBehaviour
 
     public void Start()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     private void CheckCameraBounds()

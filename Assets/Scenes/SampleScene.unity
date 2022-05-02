@@ -1629,11 +1629,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aa403d1db21ef6f42b405bc845180330, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.638
+      value: 1.633
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aa403d1db21ef6f42b405bc845180330, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.77
+      value: -0.493
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aa403d1db21ef6f42b405bc845180330, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3136,11 +3136,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 64067dbbc2139bf43888cfb6d3e0b796, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 21.085
+      value: 21.08
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 64067dbbc2139bf43888cfb6d3e0b796, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -36.17
+      value: -31.48
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 64067dbbc2139bf43888cfb6d3e0b796, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3513,6 +3513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 963194229}
+  handler: {fileID: 690245123}
   player: {fileID: 787378392}
   playerModel: {fileID: 2019163271}
   DsRoot: {fileID: 1471171766}

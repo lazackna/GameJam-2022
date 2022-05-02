@@ -7,6 +7,7 @@ public class ConsoleHandler : MonoBehaviour
     private readonly float orthographicSize = 6.0f;
 
     [SerializeField] private CameraFollow camera;
+    [SerializeField] private PowerUpHandler handler;
 
     [SerializeField] private Transform player;
 
@@ -59,6 +60,8 @@ public class ConsoleHandler : MonoBehaviour
                 dsOn = false;
                 
             }
+            
+            handler.OnPowerUpCall(PowerUpType.N64_CONSOLE);
             //switch mode from 2d to 3d
             if (is2d)
             {
@@ -90,6 +93,8 @@ public class ConsoleHandler : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
+            handler.OnPowerUpCall(PowerUpType.DS_CONSOLE);
+            
             if (dsOn)
             {
                 DsRoot.SetActive(false);
