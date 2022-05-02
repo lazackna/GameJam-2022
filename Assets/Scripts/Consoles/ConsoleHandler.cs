@@ -33,6 +33,17 @@ public class ConsoleHandler : MonoBehaviour
         dsSign.SetActive(false);
         n64Sign.SetActive(false);
         switchSign.SetActive(true);
+        is2d = true;
+        player.position = new Vector3(this.player.position.x, this.player.position.y, 0);
+        player.rotation = Quaternion.Euler(0, 0, 0);
+        playerModel.rotation = Quaternion.Euler(0, -90, 0);
+        camera.hasPerspective = false;
+        mainCamera.orthographic = true;
+        mainCamera.transform.rotation = Quaternion.Euler(0,0,0);
+        mainCamera.orthographicSize = orthographicSize;
+        dsSign.SetActive(false);
+        n64Sign.SetActive(false);
+        switchSign.SetActive(true);
     }
     
     // Update is called once per frame
