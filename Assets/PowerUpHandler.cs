@@ -69,7 +69,7 @@ public class PowerUpHandler : MonoBehaviour
     {
         if(type == PowerUpType.SWITCH_CONSOLE) return;
 
-        if(type == PowerUpType.DS_CONSOLE) UI_Handler.SetDSView((int)powerUpTime[type] >= 0, (powerUpTime[type] / MaxValue) * 100);
-        if(type == PowerUpType.N64_CONSOLE) UI_Handler.SetN64View((int)powerUpTime[type] >= 0, (powerUpTime[type] / MaxValue) * 100);
+        if(type == PowerUpType.DS_CONSOLE) UI_Handler.SetDSView((int)powerUpTime[type] > 0, (powerUpTime[type] / MaxValue) * 100);
+        if(type == PowerUpType.N64_CONSOLE) UI_Handler.SetN64View((int)powerUpTime[type] > 0, (powerUpTime[type] / MaxValue) * 100);
     }
 }
