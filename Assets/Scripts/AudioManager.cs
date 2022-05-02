@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour
         
     }
 
-    public static void Play(string name)
+    public void Play(string name)
     {
         
         AudioClip audioClip = Resources.Load<AudioClip>($@"Sounds/{name}");

@@ -110,6 +110,7 @@ public class EnemyBugController : AbstractEnemy
     public override IEnumerator die()
     {
         animator.Play("DeathAnimation");
+        GetComponent<AudioManager>().Play("hurt");
         yield return new WaitForSeconds(1);
         Destroy(this.gameObject);
 
