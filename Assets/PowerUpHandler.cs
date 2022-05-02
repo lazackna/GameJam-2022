@@ -2,6 +2,7 @@ using System;using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum PowerUpType
 {
@@ -15,7 +16,11 @@ public class PowerUpHandler : MonoBehaviour
 
     private PowerUpType activePowerUp = PowerUpType.SWITCH_CONSOLE;
 
+    [SerializeField] private Text DSText;
+    [SerializeField] private Text N64Text;
+    
     private Dictionary<PowerUpType, float> powerUpTime;
+    private Dictionary<PowerUpType, Text> powerUpObject;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +29,12 @@ public class PowerUpHandler : MonoBehaviour
         {
             { PowerUpType.DS_CONSOLE, 0 },
             { PowerUpType.N64_CONSOLE, 0 }
+        };
+        
+        powerUpObject = new Dictionary<PowerUpType, Text>
+        {
+            { PowerUpType.DS_CONSOLE, DSText },
+            { PowerUpType.N64_CONSOLE, N64Text }
         };
     }
 
@@ -34,18 +45,20 @@ public class PowerUpHandler : MonoBehaviour
 
         powerUpTime[activePowerUp] -= Time.deltaTime;
         
-        if (powerUpTime[activePowerUp] < 0) DrawPowerUps();
+        if (powerUpTime[activePowerUp] < 0) DrawPowerUps(activePowerUp);
     }
 
     public void OnPowerUpTrigger(PowerUpType powerUpType, float time)
     {
         powerUpTime[powerUpType] = time;
 
-        DrawPowerUps();
+        DrawPowerUps(powerUpType);
     }
 
-    private void DrawPowerUps()
+    private void DrawPowerUps(PowerUpType type)
     {
-        //throw new NotImplementedException();
+        powerUpObject[type].text = (int)powerUpTime[type] + "";
+        
+        powerUpObject[type].gameObject.SetActive(powerUpTime[type] >= 0);
     }
 }
