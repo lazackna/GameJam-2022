@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class ConsoleHandler : MonoBehaviour
 {
-    private Vector3 cameraPositions2d = new Vector3(3.5f, 2.5f, -6);
-    private Vector3 cameraPositions3d = new Vector3(-10, 3, 0);
+    private readonly float orthographicSize = 6.0f;
 
-    [SerializeField] public float orthographicSize = 4.5f;
-    
     [SerializeField] private CameraFollow camera;
 
     [SerializeField] private Transform player;
-    
+
+    [SerializeField] private Transform playerModel;    
     [SerializeField]private GameObject DsRoot;
+    public GameObject dsSign;
+    public GameObject switchSign;
+    public GameObject n64Sign;
+
     private bool dsOn = false;
 
     public bool is2d = true;
@@ -28,7 +30,9 @@ public class ConsoleHandler : MonoBehaviour
 
     void Start()
     {
-        
+        dsSign.SetActive(false);
+        n64Sign.SetActive(false);
+        switchSign.SetActive(true);
     }
     
     // Update is called once per frame
@@ -42,6 +46,7 @@ public class ConsoleHandler : MonoBehaviour
                 DsRoot.SetActive(false);
                 mainCamera.rect = new Rect(0, 0, 1, 1);
                 dsOn = false;
+                
             }
             //switch mode from 2d to 3d
             if (is2d)
@@ -50,17 +55,25 @@ public class ConsoleHandler : MonoBehaviour
                 player.rotation = Quaternion.Euler(0, 90, 0);
                 camera.hasPerspective = true;
                 mainCamera.orthographic = false;
-                camera.offset = cameraPositions3d;
+                playerModel.rotation = Quaternion.Euler(0, 90, 0);
+                playerModel.rotation = Quaternion.Euler(0, -90, 0);
+                dsSign.SetActive(false);
+                n64Sign.SetActive(true);
+                switchSign.SetActive(false);
             }
             else
             {
                 is2d = true;
+                player.position = new Vector3(this.player.position.x, this.player.position.y, 0);
                 player.rotation = Quaternion.Euler(0, 0, 0);
+                playerModel.rotation = Quaternion.Euler(0, -90, 0);
                 camera.hasPerspective = false;
                 mainCamera.orthographic = true;
                 mainCamera.transform.rotation = Quaternion.Euler(0,0,0);
                 mainCamera.orthographicSize = orthographicSize;
-                camera.offset = cameraPositions2d;
+                dsSign.SetActive(false);
+                n64Sign.SetActive(false);
+                switchSign.SetActive(true);
             }
         }
 
@@ -71,6 +84,18 @@ public class ConsoleHandler : MonoBehaviour
                 DsRoot.SetActive(false);
                 mainCamera.rect = new Rect(0, 0, 1, 1);
                 dsOn = false;
+                if (is2d)
+                {
+                    dsSign.SetActive(false);
+                    n64Sign.SetActive(false);
+                    switchSign.SetActive(true);
+                } else
+                {
+                    dsSign.SetActive(false);
+                    n64Sign.SetActive(true);
+                    switchSign.SetActive(false);
+                }
+                
             }
             else
             {
@@ -82,9 +107,11 @@ public class ConsoleHandler : MonoBehaviour
                     mainCamera.orthographic = true;
                     mainCamera.transform.rotation = Quaternion.Euler(0,0,0);
                     mainCamera.orthographicSize = orthographicSize;
-                    camera.offset = cameraPositions2d;
-                }
 
+                }
+                dsSign.SetActive(true);
+                n64Sign.SetActive(false);
+                switchSign.SetActive(false);
                 DsRoot.SetActive(true);
                 mainCamera.rect = new Rect(0, 0.5f, 1, 0.5f);
                 
