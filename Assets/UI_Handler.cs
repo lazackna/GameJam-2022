@@ -34,9 +34,8 @@ public class UI_Handler : MonoBehaviour
         
         if (show)
             DS_Loader.fillAmount = percent / 100f;
-        
     }
-    
+
     public static void SetN64View(bool show, float percent)
     {
         N64_Image.SetActive(show);
