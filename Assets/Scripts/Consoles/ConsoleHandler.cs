@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Player;
 using UnityEngine;
 
 public class ConsoleHandler : MonoBehaviour
@@ -103,6 +104,8 @@ public class ConsoleHandler : MonoBehaviour
     {
         if (dsOn)
         {
+            PlayerMotor.CanMove = true;
+            
             DsRoot.SetActive(false);
             mainCamera.rect = new Rect(0, 0, 1, 1);
             dsOn = false;
@@ -121,6 +124,8 @@ public class ConsoleHandler : MonoBehaviour
         }
         else
         {
+            PlayerMotor.CanMove = false;
+            
             if (!is2d)
             {
                 is2d = true;

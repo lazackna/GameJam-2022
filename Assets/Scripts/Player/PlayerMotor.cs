@@ -12,6 +12,8 @@ namespace Player
         [SerializeField] public GameObject hearth1;
         [SerializeField] public GameObject hearth2;
 
+        public static bool CanMove = true;
+        
         private Rigidbody body;
         [SerializeField] private Transform[] groundCheck;
 
@@ -90,6 +92,8 @@ namespace Player
 
         private void FixedUpdate()
         {
+            if (!CanMove) return;
+
             Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
             if (consoleHandler.is2d)
             {
