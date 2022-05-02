@@ -12,7 +12,7 @@ public class FallStart : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        PlayerMotor.CanMove = false;
     }
 
     // Update is called once per frame
@@ -30,6 +30,7 @@ public class FallStart : MonoBehaviour
             Destroy(fallColliders);
             Destroy(enemyWall);
             Destroy(this);
+            PlayerMotor.CanMove = true;
         }
     }
 }
