@@ -28,6 +28,11 @@ public class CameraFollow : MonoBehaviour
         CheckCameraBounds();
     }
 
+    public void Start()
+    {
+        //throw new NotImplementedException();
+    }
+
     private void CheckCameraBounds()
     {
         // Only 2D camera uses bounds
