@@ -57,7 +57,6 @@ public class ConsoleHandler : MonoBehaviour
                 mainCamera.orthographic = false;
                 playerModel.rotation = Quaternion.Euler(0, 90, 0);
                 playerModel.rotation = Quaternion.Euler(0, -90, 0);
-                camera.offset = cameraPositions3d;
                 dsSign.SetActive(false);
                 n64Sign.SetActive(true);
                 switchSign.SetActive(false);
@@ -75,8 +74,6 @@ public class ConsoleHandler : MonoBehaviour
                 dsSign.SetActive(false);
                 n64Sign.SetActive(false);
                 switchSign.SetActive(true);
-
-                camera.offset = cameraPositions2d;
             }
         }
 
@@ -110,7 +107,6 @@ public class ConsoleHandler : MonoBehaviour
                     mainCamera.orthographic = true;
                     mainCamera.transform.rotation = Quaternion.Euler(0,0,0);
                     mainCamera.orthographicSize = orthographicSize;
-                    camera.offset = cameraPositions2d;
 
                 }
                 dsSign.SetActive(true);
