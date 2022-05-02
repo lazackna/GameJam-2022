@@ -102,10 +102,18 @@ namespace Consoles
                 gameBridge = null;
             }
             gameBridge = Instantiate(bridge, point1, Quaternion.identity);
-            gameBridge.transform.localScale = new Vector3(dist, gameBridge.transform.localScale.y,gameBridge.transform.localScale.z);
+            gameBridge.transform.localScale = new Vector3(dist, gameBridge.transform.localScale.y,5);
             gameBridge.transform.rotation = Quaternion.Euler(0f, 0f, (float) degree);
             gameBridge.transform.Translate(new Vector3(dist / 2, 0, 0));
             gameBridge.layer = LayerMask.NameToLayer("Ground");
+            PhysicMaterial material = new PhysicMaterial();
+            material.dynamicFriction = 0;
+            material.staticFriction = 0;
+            material.bounciness = 0;
+            material.frictionCombine = PhysicMaterialCombine.Minimum;
+            material.bounceCombine = PhysicMaterialCombine.Minimum;
+            gameBridge.AddComponent<BoxCollider>();
+            gameBridge.GetComponent<BoxCollider>().material = material;
         }
 
         public Vector3 RelativeToPlayerPosition(Vector3 relative)
