@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class ConsoleHandler : MonoBehaviour
 {
-    private Vector3 cameraPositions2d = new Vector3(3.5f, 2.5f, -6);
-    private Vector3 cameraPositions3d = new Vector3(-10, 3, 0);
+    private readonly float orthographicSize = 6.0f;
 
-    [SerializeField] public float orthographicSize = 4.5f;
-    
     [SerializeField] private CameraFollow camera;
 
     [SerializeField] private Transform player;
