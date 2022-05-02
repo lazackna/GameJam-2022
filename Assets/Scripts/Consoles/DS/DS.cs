@@ -81,6 +81,7 @@ namespace Consoles
             // Debug.Log("Mouse Drag");
         }
 
+        private GameObject gameBridge;
         public void PlaceBridge(Vector3[] points)
         {
             Vector3 point1 = points[0];
@@ -95,13 +96,16 @@ namespace Consoles
             double degree = angle * Mathf.Rad2Deg;
 
             float dist = Vector3.Distance(point1, point2);
-
-            GameObject o = Instantiate(bridge, point1, Quaternion.identity);
-            o.transform.localScale = new Vector3(dist, o.transform.localScale.y,o.transform.localScale.z);
-            o.transform.rotation = Quaternion.Euler(0f,0f, (float)degree);
-            Vector3 halfdist = new Vector3(dist / 2, o.transform.position.y, o.transform.position.z);
-            //o.transform.position = (dist / 2) * o.transform.forward;
-            o.transform.Translate(new Vector3(dist / 2, 0, 0));
+            if (gameBridge != null)
+            {
+                Destroy(gameBridge);
+                gameBridge = null;
+            }
+            gameBridge = Instantiate(bridge, point1, Quaternion.identity);
+            gameBridge.transform.localScale = new Vector3(dist, gameBridge.transform.localScale.y,gameBridge.transform.localScale.z);
+            gameBridge.transform.rotation = Quaternion.Euler(0f, 0f, (float) degree);
+            gameBridge.transform.Translate(new Vector3(dist / 2, 0, 0));
+            gameBridge.layer = LayerMask.NameToLayer("Ground");
         }
 
         public Vector3 RelativeToPlayerPosition(Vector3 relative)
