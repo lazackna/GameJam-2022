@@ -51,19 +51,24 @@ namespace Consoles
             {
                 Debug.Log("Adding line");
                 lineController.SetupLine(points.ToArray());
-                Vector3 relative = GetRelativePosition(lastPoint);
-                Vector3 relativeToPlayer = dsTextureCamera.ViewportToWorldPoint(
-                    new Vector3(
-                        relative.x,
-                        relative.y,
-                        -dsTextureCamera.transform.position.z));
-                
-                Instantiate(cube, relativeToPlayer, Quaternion.identity);
+                Vector3[] worldPoints = new Vector3[2];
+                for (int i = 0; i < worldPoints.Length; i++)
+                {
+                    Vector3 relative = GetRelativePosition(points[i]);
+                    Vector3 relativeToPlayer = dsTextureCamera.ViewportToWorldPoint(
+                        new Vector3(
+                            relative.x,
+                            relative.y,
+                            -dsTextureCamera.transform.position.z));
+                    worldPoints[i] = relativeToPlayer;
+                }
 
+               // Instantiate(cube, relativeToPlayer, Quaternion.identity);
+                PlaceBridge(worldPoints);
                 points.Clear();
             }
         }
-
+        
         void OnMouseDrag()
         {
             // Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
@@ -80,13 +85,23 @@ namespace Consoles
         {
             Vector3 point1 = points[0];
             Vector3 point2 = points[1];
-
+            point1.z = 0;
+            point2.z = 0;
 
             float deltaX = point2.x - point1.x;
             float deltaY = point2.y - point1.y;
 
             double angle = Math.Atan2((double)deltaY, (double)deltaX);
+            double degree = angle * Mathf.Rad2Deg;
 
+            float dist = Vector3.Distance(point1, point2);
+
+            GameObject o = Instantiate(bridge, point1, Quaternion.identity);
+            o.transform.localScale = new Vector3(dist, o.transform.localScale.y,o.transform.localScale.z);
+            o.transform.rotation = Quaternion.Euler(0f,0f, (float)degree);
+            Vector3 halfdist = new Vector3(dist / 2, o.transform.position.y, o.transform.position.z);
+            //o.transform.position = (dist / 2) * o.transform.forward;
+            o.transform.Translate(new Vector3(dist / 2, 0, 0));
         }
 
         public Vector3 RelativeToPlayerPosition(Vector3 relative)
