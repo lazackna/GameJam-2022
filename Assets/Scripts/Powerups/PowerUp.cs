@@ -25,6 +25,7 @@ public class PowerUp : MonoBehaviour
         
         handler.OnPowerUpTrigger(powerUpType, totalTime);
         
+        Destroy(this.gameObject);
         Debug.Log("Player hit power-up" + powerUpType);
     }
 

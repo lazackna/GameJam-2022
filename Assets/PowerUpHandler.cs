@@ -41,8 +41,6 @@ public class PowerUpHandler : MonoBehaviour
     {
         powerUpTime[powerUpType] = time;
 
-        Debug.Log("TEST");
-        
         DrawPowerUps();
     }
 
