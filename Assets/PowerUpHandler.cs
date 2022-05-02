@@ -15,10 +15,10 @@ public class PowerUpHandler : MonoBehaviour
 {
     private PowerUpType activePowerUp = PowerUpType.SWITCH_CONSOLE;
 
+    private const int MaxValue = 20;
+    
     [SerializeField] private ConsoleHandler callbackHandler;
-    [SerializeField] private Text DSText;
-    [SerializeField] private Text N64Text;
-
+  
     private Dictionary<PowerUpType, float> powerUpTime;
     private Dictionary<PowerUpType, Text> powerUpObject;
 
@@ -29,12 +29,6 @@ public class PowerUpHandler : MonoBehaviour
         {
             { PowerUpType.DS_CONSOLE, 0 },
             { PowerUpType.N64_CONSOLE, 0 }
-        };
-
-        powerUpObject = new Dictionary<PowerUpType, Text>
-        {
-            { PowerUpType.DS_CONSOLE, DSText },
-            { PowerUpType.N64_CONSOLE, N64Text }
         };
     }
 
@@ -75,8 +69,7 @@ public class PowerUpHandler : MonoBehaviour
     {
         if(type == PowerUpType.SWITCH_CONSOLE) return;
 
-        powerUpObject[type].text = (int)powerUpTime[type] + "";
-
-        powerUpObject[type].gameObject.SetActive((int)powerUpTime[type] > 0);
+        if(type == PowerUpType.DS_CONSOLE) UI_Handler.SetDSView((int)powerUpTime[type] > 0, (powerUpTime[type] / MaxValue) * 100);
+        if(type == PowerUpType.N64_CONSOLE) UI_Handler.SetN64View((int)powerUpTime[type] > 0, (powerUpTime[type] / MaxValue) * 100);
     }
 }

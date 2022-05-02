@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  speed: 1
+  speed: 3
   consoleHandler: {fileID: 0}
 --- !u!1001 &8871597297760623066
 PrefabInstance:
