@@ -24,7 +24,7 @@ namespace Player
         [SerializeField] private float moveSpeed, jumpForce;
         private bool jump = false;
         private bool active = true;
-        public GameObject mesh;
+        //public GameObject mesh;
         public int health = 300;
 
         [SerializeField] private ConsoleHandler consoleHandler;
@@ -46,12 +46,12 @@ namespace Player
             if (isHit)
             {
                 hitTimer -= Time.deltaTime;
-                mesh.SetActive(!active);
+                //mesh.SetActive(!active);
                 active = !active;
                 if (hitTimer <= 0)
                 {
                     active = true;
-                    mesh.SetActive(active);
+                    //mesh.SetActive(active);
                     isHit = false;
                     hitTimer = 2;
                 }
