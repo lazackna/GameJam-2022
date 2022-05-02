@@ -7,13 +7,13 @@ public class CameraFollow : MonoBehaviour
 {
     public Transform target;
 
-    [SerializeField] private Vector3 cameraPositions2d;
-    [SerializeField] private Vector3 cameraPositions3d;
+    private Vector3 cameraPositions2d = new Vector3(2, -4.5f, -6);
+    private Vector3 cameraPositions3d = new Vector3(-10, 3, 0);
 
-    [SerializeField] private Vector2 cameraBounds;
-    [SerializeField] private float smoothSpeed;
+    private Vector2 cameraBounds = new Vector2(-2, 5.5f);
+    private float smoothSpeed = 0.25f;
 
-    [SerializeField] public bool hasPerspective;
+    [SerializeField] public bool hasPerspective = true;
     
     private void FixedUpdate()
     {
