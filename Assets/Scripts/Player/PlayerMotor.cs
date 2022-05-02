@@ -120,7 +120,7 @@ namespace Player
             {
                 isGrounded = false;
                 Jump();
-
+                AudioManager.Play("jump");
                 jump = false;
             }
         }
