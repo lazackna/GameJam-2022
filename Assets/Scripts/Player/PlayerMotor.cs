@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 namespace Player
 {
@@ -11,6 +11,7 @@ namespace Player
         [SerializeField] public GameObject hearth0;
         [SerializeField] public GameObject hearth1;
         [SerializeField] public GameObject hearth2;
+        [SerializeField] public GameObject gameoverCanvas;
 
         public static bool CanMove = true;
         
@@ -160,7 +161,15 @@ namespace Player
 
         private void die()
         {
+            StartCoroutine(respawn());
+        }
 
+        IEnumerator respawn()
+        {
+            gameoverCanvas.SetActive(true);
+            yield return new WaitForSeconds(4);
+            //Reload the entire scene.
+            SceneLoader.LoadScene(0);
         }
     }
 }

@@ -127,7 +127,7 @@ public class EnemyBugController : AbstractEnemy
     {
         if (collision.gameObject.Equals(player))
         {
-            if (collision.contacts[0].point.y > this.transform.position.y + 0.1 && collision.contacts[0].point.x > this.transform.position.x - 1 && collision.contacts[0].point.x < this.transform.position.x + 1)
+            if (collision.contacts[0].point.y > this.transform.position.y + 0.2 && collision.contacts[0].point.x > this.transform.position.x - 2.2 && collision.contacts[0].point.x < this.transform.position.x + 2.2)
             {
                 StartCoroutine(die());
                 

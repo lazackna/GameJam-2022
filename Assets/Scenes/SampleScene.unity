@@ -2766,6 +2766,7 @@ MonoBehaviour:
   hearth0: {fileID: 1112933199}
   hearth1: {fileID: 1060823398}
   hearth2: {fileID: 1866491957}
+  gameoverCanvas: {fileID: 1231878438}
   groundCheck:
   - {fileID: 473206648}
   whatIsGround:
