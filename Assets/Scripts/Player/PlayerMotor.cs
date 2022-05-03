@@ -36,11 +36,14 @@ namespace Player
         bool isHit = false;
 
         [SerializeField] public Animator animator;
+
+        private AudioManager audioManager;
         // Start is called before the first frame update
         void Start()
         {
             body = GetComponent<Rigidbody>();
             moveInput = new Vector2();
+            audioManager = GetComponent<AudioManager>();
         }
 
         // Update is called once per frame
@@ -121,8 +124,9 @@ namespace Player
             {
                 isGrounded = false;
                 Jump();
-
+                
                 jump = false;
+                audioManager.Play("jump");
             }
         }
 

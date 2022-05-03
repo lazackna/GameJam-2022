@@ -129,6 +129,7 @@ public class EnemyBugController : AbstractEnemy
         this.body.velocity = new Vector3(0, 0, 0);
         this.GetComponent<BoxCollider>().enabled = false;
         this.GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<AudioManager>().Play("hurt");
         yield return new WaitForSeconds(1);
         Destroy(this.gameObject);
 
