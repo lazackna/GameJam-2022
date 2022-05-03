@@ -5,7 +5,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField]private static AudioSource source;
+    [SerializeField]private AudioSource source;
     void Start()
     {
         source = GetComponent<AudioSource>();
@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour
     {
         
         AudioClip audioClip = Resources.Load<AudioClip>($@"Sounds/{name}");
-        if (audioClip == null) return;
+        if (audioClip == null || source == null) return;
         source.Stop();
         source.clip = audioClip;
         source.Play();

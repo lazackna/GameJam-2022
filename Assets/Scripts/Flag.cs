@@ -35,6 +35,7 @@ public class Flag : MonoBehaviour
         if(audioManager != null)
             audioManager.Play("win");
         yield return new WaitForSeconds(3);
+        Debug.Log("Next scene");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
