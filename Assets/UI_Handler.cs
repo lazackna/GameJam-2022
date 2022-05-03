@@ -29,6 +29,8 @@ public class UI_Handler : MonoBehaviour
         DS_Loader.gameObject.SetActive(false);
         N64_Image.SetActive(false);
         N64_Loader.gameObject.SetActive(false);
+        DS_Key.gameObject.SetActive(false);
+        N64_Key.gameObject.SetActive(false);
     }
 
     public static void SetDSView(bool show, float percent)
