@@ -4644,7 +4644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 963194229}
   handler: {fileID: 690245123}
-  player: {fileID: 787378392}
+  player: {fileID: 787378386}
   playerModel: {fileID: 2019163271}
   DsRoot: {fileID: 1471171766}
   dsSign: {fileID: 582524370}
