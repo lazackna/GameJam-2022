@@ -9,10 +9,12 @@ public class Flag : MonoBehaviour
 
     [SerializeField] private GameObject nextStageCanvas;
 
+    private AudioManager audioManager;
     // Start is called before the first frame update
     void Start()
     {
         nextStageCanvas.SetActive(false);
+        audioManager = GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -30,6 +32,8 @@ public class Flag : MonoBehaviour
     private IEnumerator NextStageCoroutine()
     {
         nextStageCanvas.SetActive(true);
+        if(audioManager != null)
+            audioManager.Play("win");
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
