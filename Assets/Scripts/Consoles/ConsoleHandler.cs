@@ -51,12 +51,12 @@ public class ConsoleHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.E))
             if (handler.OnPowerUpCall(PowerUpType.N64_CONSOLE))
                 SwitchN64();
 
 
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.Q))
             if (handler.OnPowerUpCall(PowerUpType.DS_CONSOLE))
                 SwitchNintendo();
     }

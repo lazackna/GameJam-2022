@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1444,7 +1444,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473206647}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.049, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 787378392}
@@ -2682,10 +2682,10 @@ GameObject:
   m_Component:
   - component: {fileID: 787378392}
   - component: {fileID: 787378390}
-  - component: {fileID: 787378389}
   - component: {fileID: 787378388}
   - component: {fileID: 787378387}
   - component: {fileID: 787378391}
+  - component: {fileID: 787378389}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2735,8 +2735,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &787378389
-BoxCollider:
+--- !u!136 &787378389
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2745,9 +2745,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.130658, z: 1}
-  m_Center: {x: 0, y: 0.5479534, z: 0}
+  m_Radius: 0.5
+  m_Height: 1.167079
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5338578, z: 0}
 --- !u!23 &787378390
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2809,7 +2810,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.802899
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
