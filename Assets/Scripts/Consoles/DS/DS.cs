@@ -53,11 +53,23 @@ namespace Consoles
                         -dsTextureCamera.transform.position.z));
                 worldPoints[i] = relativeToPlayer;
             }
-
+            
             // Instantiate(cube, relativeToPlayer, Quaternion.identity);
             PlaceBridge(worldPoints);
             points.Clear();
             points.Clear();
+        }
+
+        private void Update()
+        {
+            if (points.Count != 1) return;
+            
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = dsCamera.nearClipPlane;
+            mousePos = dsCamera.ScreenToWorldPoint(mousePos);
+            mousePos.z = transform.position.z - 0.01f;
+            
+            lineController.SetupLine(new[] {points[0], mousePos});
         }
 
         void OnMouseDrag()
