@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour
 {
     public Transform target;
 
-    private Vector3 cameraPositions2d = new Vector3(2, -4.5f, -6);
+    private Vector3 cameraPositions2d = new Vector3(2, -2.5f, -6);
     private Vector3 cameraPositions3d = new Vector3(-10, 3, 0);
 
     private Vector2 cameraBounds = new Vector2(-2, 5.5f);
