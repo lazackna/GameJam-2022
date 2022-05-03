@@ -23,52 +23,43 @@ namespace Consoles
 
         private void OnMouseDown()
         {
-            // screenPoint = dsCamera.WorldToScreenPoint(gameObject.transform.position);
-            //
-            // offset = gameObject.transform.position - dsCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
-            //     Input.mousePosition.y, screenPoint.z));
-            // //lastPoint = offset;
-            // Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-            //
-            // Vector3 curPosition = dsCamera.ScreenToWorldPoint(curScreenPoint) + offset;
-            // Debug.DrawLine(lastPoint, curPosition, Color.red);
-            // Vector3 drawPosition = new Vector3(curPosition.x, curPosition.y, transform.position.z - 1);
-            // lastPoint = curPosition;
-            // //transform.position = curPosition;
-            // Debug.Log("Mouse down");
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = dsCamera.nearClipPlane;
             lastPoint = dsCamera.ScreenToWorldPoint(mousePos);
             lastPoint.z = transform.position.z - 0.01f;
+            points.Add(lastPoint);
         }
 
         private List<Vector3> points = new List<Vector3>();
 
         private void OnMouseUp()
         {
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = dsCamera.nearClipPlane;
+            lastPoint = dsCamera.ScreenToWorldPoint(mousePos);
+            lastPoint.z = transform.position.z - 0.01f;
             points.Add(lastPoint);
-            if (points.Count >= 2)
-            {
-                Debug.Log("Adding line");
-                lineController.SetupLine(points.ToArray());
-                Vector3[] worldPoints = new Vector3[2];
-                for (int i = 0; i < worldPoints.Length; i++)
-                {
-                    Vector3 relative = GetRelativePosition(points[i]);
-                    Vector3 relativeToPlayer = dsTextureCamera.ViewportToWorldPoint(
-                        new Vector3(
-                            relative.x,
-                            relative.y,
-                            -dsTextureCamera.transform.position.z));
-                    worldPoints[i] = relativeToPlayer;
-                }
 
-               // Instantiate(cube, relativeToPlayer, Quaternion.identity);
-                PlaceBridge(worldPoints);
-                points.Clear();
+            Debug.Log("Adding line");
+            lineController.SetupLine(points.ToArray());
+            Vector3[] worldPoints = new Vector3[2];
+            for (int i = 0; i < worldPoints.Length; i++)
+            {
+                Vector3 relative = GetRelativePosition(points[i]);
+                Vector3 relativeToPlayer = dsTextureCamera.ViewportToWorldPoint(
+                    new Vector3(
+                        relative.x,
+                        relative.y,
+                        -dsTextureCamera.transform.position.z));
+                worldPoints[i] = relativeToPlayer;
             }
+
+            // Instantiate(cube, relativeToPlayer, Quaternion.identity);
+            PlaceBridge(worldPoints);
+            points.Clear();
+            points.Clear();
         }
-        
+
         void OnMouseDrag()
         {
             // Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
@@ -82,6 +73,7 @@ namespace Consoles
         }
 
         private GameObject gameBridge;
+
         public void PlaceBridge(Vector3[] points)
         {
             Vector3 point1 = points[0];
@@ -101,9 +93,10 @@ namespace Consoles
                 Destroy(gameBridge);
                 gameBridge = null;
             }
+
             gameBridge = Instantiate(bridge, point1, Quaternion.identity);
-            gameBridge.transform.localScale = new Vector3(dist, gameBridge.transform.localScale.y,5);
-            gameBridge.transform.rotation = Quaternion.Euler(0f, 0f, (float) degree);
+            gameBridge.transform.localScale = new Vector3(dist, gameBridge.transform.localScale.y, 5);
+            gameBridge.transform.rotation = Quaternion.Euler(0f, 0f, (float)degree);
             gameBridge.transform.Translate(new Vector3(dist / 2, 0, 0));
             gameBridge.layer = LayerMask.NameToLayer("Ground");
             PhysicMaterial material = new PhysicMaterial();
@@ -145,8 +138,8 @@ namespace Consoles
             Vector3 diff = point - centerPoint;
             Vector3 relative = diff / (transform.localScale.x * 10);
 
-            relative = new Vector3(relative.x * -1 + 0.5f,  (relative.y - 0.5f) * -1, 0);
-            
+            relative = new Vector3(relative.x * -1 + 0.5f, (relative.y - 0.5f) * -1, 0);
+
             Debug.Log(relative.x + ", " + relative.y);
             return relative;
         }
