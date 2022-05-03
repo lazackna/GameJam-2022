@@ -9,9 +9,9 @@ public class ConsoleHandler : MonoBehaviour
 
     [SerializeField] private CameraFollow camera;
     [SerializeField] private PowerUpHandler handler;
-
-    [SerializeField] private Transform player;
-
+    [SerializeField] private GameObject postProcessing;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject dsScreenTop;
     [SerializeField] private Transform playerModel;
     [SerializeField] private GameObject DsRoot;
     public GameObject dsSign;
@@ -35,9 +35,10 @@ public class ConsoleHandler : MonoBehaviour
         dsSign.SetActive(false);
         n64Sign.SetActive(false);
         switchSign.SetActive(true);
+        dsScreenTop.SetActive(false);
         is2d = true;
-        player.position = new Vector3(this.player.position.x, this.player.position.y, 0);
-        player.rotation = Quaternion.Euler(0, 0, 0);
+        player.transform.position = new Vector3(this.player.transform.position.x, this.player.transform.position.y, 0);
+        player.transform.rotation = Quaternion.Euler(0, 0, 0);
         playerModel.rotation = Quaternion.Euler(0, -90, 0);
         camera.hasPerspective = false;
         mainCamera.orthographic = true;
@@ -51,12 +52,12 @@ public class ConsoleHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.E))
             if (handler.OnPowerUpCall(PowerUpType.N64_CONSOLE))
                 SwitchN64();
 
 
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.Q))
             if (handler.OnPowerUpCall(PowerUpType.DS_CONSOLE))
                 SwitchNintendo();
     }
@@ -66,6 +67,7 @@ public class ConsoleHandler : MonoBehaviour
         if (dsOn)
         {
             DsRoot.SetActive(false);
+            dsScreenTop.SetActive(false);
             mainCamera.rect = new Rect(0, 0, 1, 1);
             dsOn = false;
         }
@@ -75,7 +77,7 @@ public class ConsoleHandler : MonoBehaviour
         if (is2d)
         {
             is2d = false;
-            player.rotation = Quaternion.Euler(0, 90, 0);
+            player.transform.rotation = Quaternion.Euler(0, 90, 0);
             camera.hasPerspective = true;
             mainCamera.orthographic = false;
             playerModel.rotation = Quaternion.Euler(0, 90, 0);
@@ -83,12 +85,14 @@ public class ConsoleHandler : MonoBehaviour
             dsSign.SetActive(false);
             n64Sign.SetActive(true);
             switchSign.SetActive(false);
+            postProcessing.SetActive(true);
+            dsScreenTop.SetActive(false);
         }
         else
         {
             is2d = true;
-            player.position = new Vector3(this.player.position.x, this.player.position.y, 0);
-            player.rotation = Quaternion.Euler(0, 0, 0);
+            player.transform.position = new Vector3(this.player.transform.position.x, this.player.transform.position.y, 0);
+            player.transform.rotation = Quaternion.Euler(0, 0, 0);
             playerModel.rotation = Quaternion.Euler(0, -90, 0);
             camera.hasPerspective = false;
             mainCamera.orthographic = true;
@@ -97,6 +101,8 @@ public class ConsoleHandler : MonoBehaviour
             dsSign.SetActive(false);
             n64Sign.SetActive(false);
             switchSign.SetActive(true);
+            postProcessing.SetActive(false);
+            dsScreenTop.SetActive(false);
         }
     }
 
@@ -114,12 +120,16 @@ public class ConsoleHandler : MonoBehaviour
                 dsSign.SetActive(false);
                 n64Sign.SetActive(false);
                 switchSign.SetActive(true);
+                postProcessing.SetActive(false);
+                dsScreenTop.SetActive(false);
             }
             else
             {
                 dsSign.SetActive(false);
                 n64Sign.SetActive(true);
                 switchSign.SetActive(false);
+                postProcessing.SetActive(true);
+                dsScreenTop.SetActive(false);
             }
         }
         else
@@ -129,17 +139,20 @@ public class ConsoleHandler : MonoBehaviour
             if (!is2d)
             {
                 is2d = true;
-                player.rotation = Quaternion.Euler(0, 0, 0);
+                player.transform.rotation = Quaternion.Euler(0, 0, 0);
                 camera.hasPerspective = false;
                 mainCamera.orthographic = true;
                 mainCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
                 mainCamera.orthographicSize = orthographicSize;
             }
 
+            player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             dsSign.SetActive(true);
             n64Sign.SetActive(false);
             switchSign.SetActive(false);
             DsRoot.SetActive(true);
+            postProcessing.SetActive(false);
+            dsScreenTop.SetActive(true);
             mainCamera.rect = new Rect(0, 0.5f, 1, 0.5f);
 
             dsOn = true;

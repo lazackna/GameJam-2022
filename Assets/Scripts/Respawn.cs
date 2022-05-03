@@ -33,9 +33,9 @@ public class Respawn : MonoBehaviour
     {
         //show gameover screen.
         gameoverCanvas.SetActive(true);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(4);
         //Reload the entire scene.
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(0);
     }
     
     

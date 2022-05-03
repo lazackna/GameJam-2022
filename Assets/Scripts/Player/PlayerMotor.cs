@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 namespace Player
 {
@@ -11,6 +11,7 @@ namespace Player
         [SerializeField] public GameObject hearth0;
         [SerializeField] public GameObject hearth1;
         [SerializeField] public GameObject hearth2;
+        [SerializeField] public GameObject gameoverCanvas;
 
         public static bool CanMove = true;
         
@@ -135,11 +136,7 @@ namespace Player
         {
             if (collision.gameObject.tag == "Enemy" && !isHit)
             {
-                if (collision.contacts[0].point.y < this.transform.position.y)
-                {
-                    
-                }
-                else
+                if (collision.contacts[0].point.y < collision.gameObject.transform.position.y)
                 {
                     health -= collision.gameObject.GetComponent<AbstractEnemy>().getDamage();
                     checkHealth();
@@ -168,7 +165,20 @@ namespace Player
 
         private void die()
         {
+            StartCoroutine(respawn());
+        }
 
+        public void restartLevel()
+        {
+            SceneLoader.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        IEnumerator respawn()
+        {
+            gameoverCanvas.SetActive(true);
+            yield return new WaitForSeconds(4);
+            //Reload the entire scene.
+            SceneLoader.LoadScene(0);
         }
     }
 }

@@ -18,17 +18,19 @@ public class UI_Handler : MonoBehaviour
     private void Start()
     {
         DS_Image = GameObject.Find("Canvas/DS_Loader/DS_image");
-        DS_Key = GameObject.Find("Canvas/Help-Q");
+        DS_Key = GameObject.Find("Canvas/Help-E");
         DS_Loader = GameObject.Find("Canvas/DS_Loader").GetComponent<Image>();
         
         N64_Image = GameObject.Find("Canvas/N64_Loader/N64_Image");
-        N64_Key = GameObject.Find("Canvas/Help-E");
+        N64_Key = GameObject.Find("Canvas/Help-Q");
         N64_Loader = GameObject.Find("Canvas/N64_Loader").GetComponent<Image>();
         
         DS_Image.SetActive(false);
         DS_Loader.gameObject.SetActive(false);
         N64_Image.SetActive(false);
         N64_Loader.gameObject.SetActive(false);
+        DS_Key.gameObject.SetActive(false);
+        N64_Key.gameObject.SetActive(false);
     }
 
     public static void SetDSView(bool show, float percent)
