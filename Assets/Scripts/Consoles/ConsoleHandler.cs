@@ -11,7 +11,7 @@ public class ConsoleHandler : MonoBehaviour
     [SerializeField] private PowerUpHandler handler;
     [SerializeField] private GameObject postProcessing;
     [SerializeField] private GameObject player;
-
+    [SerializeField] private GameObject dsScreenTop;
     [SerializeField] private Transform playerModel;
     [SerializeField] private GameObject DsRoot;
     public GameObject dsSign;
@@ -35,6 +35,7 @@ public class ConsoleHandler : MonoBehaviour
         dsSign.SetActive(false);
         n64Sign.SetActive(false);
         switchSign.SetActive(true);
+        dsScreenTop.SetActive(false);
         is2d = true;
         player.transform.position = new Vector3(this.player.transform.position.x, this.player.transform.position.y, 0);
         player.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -66,6 +67,7 @@ public class ConsoleHandler : MonoBehaviour
         if (dsOn)
         {
             DsRoot.SetActive(false);
+            dsScreenTop.SetActive(false);
             mainCamera.rect = new Rect(0, 0, 1, 1);
             dsOn = false;
         }
@@ -84,7 +86,7 @@ public class ConsoleHandler : MonoBehaviour
             n64Sign.SetActive(true);
             switchSign.SetActive(false);
             postProcessing.SetActive(true);
-
+            dsScreenTop.SetActive(false);
         }
         else
         {
@@ -100,7 +102,7 @@ public class ConsoleHandler : MonoBehaviour
             n64Sign.SetActive(false);
             switchSign.SetActive(true);
             postProcessing.SetActive(false);
-
+            dsScreenTop.SetActive(false);
         }
     }
 
@@ -119,7 +121,7 @@ public class ConsoleHandler : MonoBehaviour
                 n64Sign.SetActive(false);
                 switchSign.SetActive(true);
                 postProcessing.SetActive(false);
-
+                dsScreenTop.SetActive(false);
             }
             else
             {
@@ -127,6 +129,7 @@ public class ConsoleHandler : MonoBehaviour
                 n64Sign.SetActive(true);
                 switchSign.SetActive(false);
                 postProcessing.SetActive(true);
+                dsScreenTop.SetActive(false);
             }
         }
         else
@@ -149,6 +152,7 @@ public class ConsoleHandler : MonoBehaviour
             switchSign.SetActive(false);
             DsRoot.SetActive(true);
             postProcessing.SetActive(false);
+            dsScreenTop.SetActive(true);
             mainCamera.rect = new Rect(0, 0.5f, 1, 0.5f);
 
             dsOn = true;
