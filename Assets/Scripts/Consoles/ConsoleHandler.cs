@@ -10,7 +10,7 @@ public class ConsoleHandler : MonoBehaviour
     [SerializeField] private CameraFollow camera;
     [SerializeField] private PowerUpHandler handler;
 
-    [SerializeField] private Transform player;
+    [SerializeField] private GameObject player;
 
     [SerializeField] private Transform playerModel;
     [SerializeField] private GameObject DsRoot;
@@ -36,8 +36,8 @@ public class ConsoleHandler : MonoBehaviour
         n64Sign.SetActive(false);
         switchSign.SetActive(true);
         is2d = true;
-        player.position = new Vector3(this.player.position.x, this.player.position.y, 0);
-        player.rotation = Quaternion.Euler(0, 0, 0);
+        player.transform.position = new Vector3(this.player.transform.position.x, this.player.transform.position.y, 0);
+        player.transform.rotation = Quaternion.Euler(0, 0, 0);
         playerModel.rotation = Quaternion.Euler(0, -90, 0);
         camera.hasPerspective = false;
         mainCamera.orthographic = true;
@@ -75,7 +75,7 @@ public class ConsoleHandler : MonoBehaviour
         if (is2d)
         {
             is2d = false;
-            player.rotation = Quaternion.Euler(0, 90, 0);
+            player.transform.rotation = Quaternion.Euler(0, 90, 0);
             camera.hasPerspective = true;
             mainCamera.orthographic = false;
             playerModel.rotation = Quaternion.Euler(0, 90, 0);
@@ -87,8 +87,8 @@ public class ConsoleHandler : MonoBehaviour
         else
         {
             is2d = true;
-            player.position = new Vector3(this.player.position.x, this.player.position.y, 0);
-            player.rotation = Quaternion.Euler(0, 0, 0);
+            player.transform.position = new Vector3(this.player.transform.position.x, this.player.transform.position.y, 0);
+            player.transform.rotation = Quaternion.Euler(0, 0, 0);
             playerModel.rotation = Quaternion.Euler(0, -90, 0);
             camera.hasPerspective = false;
             mainCamera.orthographic = true;
@@ -129,13 +129,14 @@ public class ConsoleHandler : MonoBehaviour
             if (!is2d)
             {
                 is2d = true;
-                player.rotation = Quaternion.Euler(0, 0, 0);
+                player.transform.rotation = Quaternion.Euler(0, 0, 0);
                 camera.hasPerspective = false;
                 mainCamera.orthographic = true;
                 mainCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
                 mainCamera.orthographicSize = orthographicSize;
             }
 
+            player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             dsSign.SetActive(true);
             n64Sign.SetActive(false);
             switchSign.SetActive(false);
