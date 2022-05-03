@@ -12,6 +12,12 @@ public class PowerUp : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private PowerUpHandler handler;
 
+    private AudioManager audioManager;
+    
+    private void Start()
+    {
+        audioManager = GetComponent<AudioManager>();
+    }
 
     // Update is called once per frame
     protected void Update()
@@ -24,7 +30,8 @@ public class PowerUp : MonoBehaviour
         if (!other.gameObject.Equals(player)) return;
         
         handler.OnPowerUpTrigger(powerUpType, totalTime);
-        
+        if(audioManager != null)
+            audioManager.Play("powerup");
         Destroy(this.gameObject);
         Debug.Log("Player hit power-up" + powerUpType);
     }
