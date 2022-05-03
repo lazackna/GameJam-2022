@@ -132,7 +132,6 @@ namespace Player
         {
             if (collision.gameObject.tag == "Enemy" && !isHit)
             {
-                Debug.Log(string.Format("enemy point:{0} / player point:{1}", collision.contacts[0].point, this.transform.position));
                 if (collision.contacts[0].point.y < collision.gameObject.transform.position.y)
                 {
                     health -= collision.gameObject.GetComponent<AbstractEnemy>().getDamage();

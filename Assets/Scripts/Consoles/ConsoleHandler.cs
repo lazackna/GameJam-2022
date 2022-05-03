@@ -9,7 +9,7 @@ public class ConsoleHandler : MonoBehaviour
 
     [SerializeField] private CameraFollow camera;
     [SerializeField] private PowerUpHandler handler;
-
+    [SerializeField] private GameObject postProcessing;
     [SerializeField] private GameObject player;
 
     [SerializeField] private Transform playerModel;
@@ -83,6 +83,8 @@ public class ConsoleHandler : MonoBehaviour
             dsSign.SetActive(false);
             n64Sign.SetActive(true);
             switchSign.SetActive(false);
+            postProcessing.SetActive(true);
+
         }
         else
         {
@@ -97,6 +99,8 @@ public class ConsoleHandler : MonoBehaviour
             dsSign.SetActive(false);
             n64Sign.SetActive(false);
             switchSign.SetActive(true);
+            postProcessing.SetActive(false);
+
         }
     }
 
@@ -114,12 +118,15 @@ public class ConsoleHandler : MonoBehaviour
                 dsSign.SetActive(false);
                 n64Sign.SetActive(false);
                 switchSign.SetActive(true);
+                postProcessing.SetActive(false);
+
             }
             else
             {
                 dsSign.SetActive(false);
                 n64Sign.SetActive(true);
                 switchSign.SetActive(false);
+                postProcessing.SetActive(true);
             }
         }
         else
@@ -141,6 +148,7 @@ public class ConsoleHandler : MonoBehaviour
             n64Sign.SetActive(false);
             switchSign.SetActive(false);
             DsRoot.SetActive(true);
+            postProcessing.SetActive(false);
             mainCamera.rect = new Rect(0, 0.5f, 1, 0.5f);
 
             dsOn = true;
