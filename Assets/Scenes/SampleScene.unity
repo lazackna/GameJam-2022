@@ -2473,6 +2473,7 @@ GameObject:
   - component: {fileID: 787378387}
   - component: {fileID: 787378391}
   - component: {fileID: 787378393}
+  - component: {fileID: 787378389}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5428,6 +5429,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 787378387}
+    - target: {fileID: 1602528673576854165, guid: 6e22b53390f90684db3e5ea7891b49fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1602528674455189328, guid: 6e22b53390f90684db3e5ea7891b49fe, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -5520,6 +5525,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1028732984}
+    - target: {fileID: 9179076411770791001, guid: 6e22b53390f90684db3e5ea7891b49fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e22b53390f90684db3e5ea7891b49fe, type: 3}
 --- !u!1001 &3895767008966025776
