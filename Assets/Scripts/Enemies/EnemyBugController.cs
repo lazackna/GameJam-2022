@@ -1,3 +1,4 @@
+using Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +7,11 @@ public class EnemyBugController : AbstractEnemy
 {
 
     //Needs to change
-    [SerializeField] GameObject player;
+    GameObject player;
     public int speed = 2;
     private Rigidbody body;
     private Animator animator;
-    [SerializeField] ConsoleHandler consoleHandler;
+    ConsoleHandler consoleHandler;
     bool isAttacking = false;
     bool dead = false;
 
@@ -21,6 +22,8 @@ public class EnemyBugController : AbstractEnemy
         this.damage = 100;
         body = this.GetComponent<Rigidbody>();
         animator = this.GetComponent<Animator>();
+        player = FindObjectOfType<PlayerMotor>().gameObject;
+        consoleHandler = FindObjectOfType<ConsoleHandler>();
     }
 
     // Update is called once per frame
