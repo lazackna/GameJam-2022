@@ -12,6 +12,7 @@ public class EnemyBugController : AbstractEnemy
     private Animator animator;
     [SerializeField] ConsoleHandler consoleHandler;
     bool isAttacking = false;
+    bool dead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,7 @@ public class EnemyBugController : AbstractEnemy
     // Update is called once per frame
     void Update()
     {
-        walkTowardsPlayer();
+        if(!dead) walkTowardsPlayer();
     }
 
     private void walkTowardsPlayer()
@@ -110,6 +111,10 @@ public class EnemyBugController : AbstractEnemy
     public override IEnumerator die()
     {
         animator.Play("DeathAnimation");
+        dead = true;
+        this.body.velocity = new Vector3(0, 0, 0);
+        this.GetComponent<BoxCollider>().enabled = false;
+        this.GetComponent<Rigidbody>().useGravity = false;
         yield return new WaitForSeconds(1);
         Destroy(this.gameObject);
 

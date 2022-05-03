@@ -131,11 +131,7 @@ namespace Player
         {
             if (collision.gameObject.tag == "Enemy" && !isHit)
             {
-                if (collision.contacts[0].point.y < this.transform.position.y)
-                {
-                    
-                }
-                else
+                if (collision.contacts[0].point.y < collision.gameObject.transform.position.y + 0.89)
                 {
                     health -= collision.gameObject.GetComponent<AbstractEnemy>().getDamage();
                     checkHealth();
