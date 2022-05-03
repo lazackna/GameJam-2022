@@ -9,7 +9,6 @@ public class Flag : MonoBehaviour
 
     [SerializeField] private GameObject nextStageCanvas;
 
-    [SerializeField] private String nextSceneName;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +31,6 @@ public class Flag : MonoBehaviour
     {
         nextStageCanvas.SetActive(true);
         yield return new WaitForSeconds(3);
-        SceneManager.LoadScene(nextSceneName);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
