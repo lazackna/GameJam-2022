@@ -132,7 +132,8 @@ namespace Player
         {
             if (collision.gameObject.tag == "Enemy" && !isHit)
             {
-                if (collision.contacts[0].point.y < collision.gameObject.transform.position.y + 0.89)
+                Debug.Log(string.Format("enemy point:{0} / player point:{1}", collision.contacts[0].point, this.transform.position));
+                if (collision.contacts[0].point.y < collision.gameObject.transform.position.y)
                 {
                     health -= collision.gameObject.GetComponent<AbstractEnemy>().getDamage();
                     checkHealth();
@@ -162,6 +163,11 @@ namespace Player
         private void die()
         {
             StartCoroutine(respawn());
+        }
+
+        public void restartLevel()
+        {
+            SceneLoader.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         IEnumerator respawn()
